@@ -69,14 +69,14 @@ public:
 };
 
 
-int main(int argc, char** argv)
-{
-	Solution s;
-
-	std::vector<int> test_vec = { 3, 3 };
-	std::vector<int> result;
-
-	result = s.TwoSum(test_vec, 6);
-
-	return 0;
-}
+//int main(int argc, char** argv)
+//{
+//	Solution s;
+//
+//	std::vector<int> test_vec = { 3, 3 };
+//	std::vector<int> result;
+//
+//	result = s.TwoSum(test_vec, 6);
+//
+//	return 0;
+//}
