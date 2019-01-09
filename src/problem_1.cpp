@@ -65,7 +65,6 @@ public:
 
 		return std::vector<int>(0, 0);
 	}
-
 };
 
 

@@ -1,4 +1,4 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 
 /**
  * https://leetcode.com/problems/add-two-numbers/
@@ -20,8 +20,8 @@ class Solution
 {
 public:
 	/**
-	 * ½øÎ»µÄĞèÒª±£Áô½øÎ»µÄÖµ£¬Áôµ½ÏÂÒ»´ÎÏà¼ÓµÄÊ±ºò¼ÓÉÏ
-	 * ×îºóÒ»Î»¼ÓÍêÈç¹û»¹ÓĞ½øÎ»µÄÖµ£¬ĞèÒªÔÙ¼ÓÒ»¸ö½ÚµãÔÚ×îºó
+	 * è¿›ä½çš„éœ€è¦ä¿ç•™è¿›ä½çš„å€¼ï¼Œç•™åˆ°ä¸‹ä¸€æ¬¡ç›¸åŠ çš„æ—¶å€™åŠ ä¸Š
+	 * æœ€åä¸€ä½åŠ å®Œå¦‚æœè¿˜æœ‰è¿›ä½çš„å€¼ï¼Œéœ€è¦å†åŠ ä¸€ä¸ªèŠ‚ç‚¹åœ¨æœ€å
 	 */
 	ListNode* AddTwoNumbers(const ListNode* l1, const ListNode* l2)
 	{
@@ -79,7 +79,7 @@ public:
 	}
 
 	/**
-	 * ¼ò»¯´úÂë½á¹¹ºÍÁ÷³Ì 
+	 * ç®€åŒ–ä»£ç ç»“æ„å’Œæµç¨‹ 
 	 */
 	ListNode* AddTwoNumbersBetter(const ListNode* l1, const ListNode* l2)
 	{
