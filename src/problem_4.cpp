@@ -154,14 +154,14 @@ public:
 	}
 };
 
-int main(int argc, char** argv)
-{
-	Solution s;
-	std::vector<int> nums1;
-	std::vector<int> nums2 = {1};
-
-	double ret = s.FindMedianSortedArraysBetter(nums1, nums2);
-
-	return 0;
-
-}
+//int main(int argc, char** argv)
+//{
+//	Solution s;
+//	std::vector<int> nums1;
+//	std::vector<int> nums2 = {1};
+//
+//	double ret = s.FindMedianSortedArraysBetter(nums1, nums2);
+//
+//	return 0;
+//
+//}
