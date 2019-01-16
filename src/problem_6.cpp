@@ -102,14 +102,14 @@ public:
 	}
 };
 
-int main(int argc, char** argv)
-{
-	Solution s;
-	std::string str = "PAYPALISHIRING";
-
-	std::string result = s.Convert2(str, 3);
-
-
-
-	return 0;
-}
+//int main(int argc, char** argv)
+//{
+//	Solution s;
+//	std::string str = "PAYPALISHIRING";
+//
+//	std::string result = s.Convert2(str, 3);
+//
+//
+//
+//	return 0;
+//}
