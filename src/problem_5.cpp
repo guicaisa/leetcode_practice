@@ -343,14 +343,14 @@ private:
 	}
 };
 
-int main(int argc, char** argv)
-{
-	Solution s;
-
-	std::string str = "ababa";
-
-	std::string ret = s.LongestPalindromeBetter4(str);
-
-
-	return 0;
-}
+//int main(int argc, char** argv)
+//{
+//	Solution s;
+//
+//	std::string str = "ababa";
+//
+//	std::string ret = s.LongestPalindromeBetter4(str);
+//
+//
+//	return 0;
+//}
