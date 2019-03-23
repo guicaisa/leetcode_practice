@@ -47,12 +47,12 @@ public:
 	}
 };
 
-int main(int argc, char** argv)
-{
-	Solution s;
-	std::vector<int> nums = { 3, 2, 2, 3 };
-
-	int ret = s.RemoveElement(nums, 3);
-
-	return 0;
-}
+//int main(int argc, char** argv)
+//{
+//	Solution s;
+//	std::vector<int> nums = { 3, 2, 2, 3 };
+//
+//	int ret = s.RemoveElement(nums, 3);
+//
+//	return 0;
+//}
