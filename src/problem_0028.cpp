@@ -112,12 +112,12 @@ private:
 	}
 };
 
-int main(int argc, char** argv)
-{
-	Solution s;
-
-	int ret = s.StrStrBetter("mississippi", "issip");
-
-
-	return 0;
-}
+//int main(int argc, char** argv)
+//{
+//	Solution s;
+//
+//	int ret = s.StrStrBetter("mississippi", "issip");
+//
+//
+//	return 0;
+//}
