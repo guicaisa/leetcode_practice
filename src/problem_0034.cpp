@@ -86,13 +86,13 @@ public:
 	}
 };
 
-int main(int argc, char** argv)
-{
-	Solution s;
-
-	std::vector<int> vi = { 5, 7, 7, 8, 8, 10 };
-
-	std::vector<int> ret = s.SearchRange(vi, 6);
-
-	return 0;
-}
+//int main(int argc, char** argv)
+//{
+//	Solution s;
+//
+//	std::vector<int> vi = { 5, 7, 7, 8, 8, 10 };
+//
+//	std::vector<int> ret = s.SearchRange(vi, 6);
+//
+//	return 0;
+//}
