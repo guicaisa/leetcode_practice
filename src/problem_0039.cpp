@@ -11,7 +11,7 @@ class Solution
 {
 public:
 	// 递归处理所有的情况
-	std::vector<std::vector<int> > CombinationSum(const std::vector<int>& candidates, const int target) 
+	std::vector<std::vector<int> > CombinationSum(std::vector<int>& candidates, const int target) 
 	{
 		sort(candidates.begin(), candidates.end());
 		std::vector<int> temp;
