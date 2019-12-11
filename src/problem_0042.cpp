@@ -48,13 +48,13 @@ public:
 	}
 };
 
-int main(int argc, char** argv)
-{
-	Solution s;
-
-	std::vector<int> vi = { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 };
-
-	int ret = s.Trap(vi);
-
-	return 0;
-}
+//int main(int argc, char** argv)
+//{
+//	Solution s;
+//
+//	std::vector<int> vi = { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 };
+//
+//	int ret = s.Trap(vi);
+//
+//	return 0;
+//}
