@@ -1,8 +1,7 @@
 ﻿#include <stdio.h>
 
-/**
- * https://leetcode.com/problems/add-two-numbers/
- */
+// https://leetcode.com/problems/add-two-numbers/
+
 
  struct ListNode 
  {
@@ -19,10 +18,9 @@
 class Solution
 {
 public:
-	/**
-	 * 进位的需要保留进位的值，留到下一次相加的时候加上
-	 * 最后一位加完如果还有进位的值，需要再加一个节点在最后
-	 */
+	
+	// 进位的需要保留进位的值，留到下一次相加的时候加上
+	// 最后一位加完如果还有进位的值，需要再加一个节点在最后
 	ListNode* AddTwoNumbers(const ListNode* l1, const ListNode* l2)
 	{
 		if (l1 == NULL && l2 == NULL)
@@ -78,9 +76,7 @@ public:
 		return head;
 	}
 
-	/**
-	 * 简化代码结构和流程 
-	 */
+	// 简化代码结构和流程 
 	ListNode* AddTwoNumbersBetter(const ListNode* l1, const ListNode* l2)
 	{
 		ListNode head(0);
