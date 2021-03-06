@@ -3,7 +3,7 @@
 #include <map>
 #include <algorithm>
 
-// https://leetcode.com/problems/two-sum/
+// https://leetcode-cn.com/problems/two-sum/
 
 class Solution
 {
@@ -16,12 +16,12 @@ public:
 	{
 		std::map<int, int> number_to_index;
 
-		for (int i = 0; i < nums.size(); ++i)
+		for (size_t i = 0; i < nums.size(); ++i)
 		{
 			number_to_index[nums[i]] = i;
 		}
 
-		for (int i = 0; i < nums.size(); ++i)
+		for (size_t i = 0; i < nums.size(); ++i)
 		{
 			int differ = target - nums[i];
 
@@ -46,7 +46,7 @@ public:
 	{
 		std::map<int, int> number_to_index;
 
-		for (int i = 0; i < nums.size(); ++i)
+		for (size_t i = 0; i < nums.size(); ++i)
 		{
 			int differ = target - nums[i];
 
