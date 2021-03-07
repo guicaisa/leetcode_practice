@@ -48,8 +48,8 @@ public:
 	// 根据上面的"ababa"的例子，dp[0][4]即"ababa"是否为回文的条件为dp[0][4] = dp[1][3] && s[0] == s[4]
 	// 由此可以得出一下公式
 	// dp[i, i] = true，单字符子串
-	// dp[i, i + 1] == s[i] == s[i + 1]，相邻的2个字符的子串，必须2个字符相等 
-	// dp[i, j] == dp[i + 1, j - 1] && s[i] == s[j]，2个字符以上的子串，必须依赖中间子串的结果和首位2个字符是否相等
+	// dp[i, i + 1] = s[i] == s[i + 1]，相邻的2个字符的子串，必须2个字符相等 
+	// dp[i, j] = dp[i + 1, j - 1] && s[i] == s[j]，2个字符以上的子串，必须依赖中间子串的结果和首位2个字符是否相等
 	// 从短子串开始生成动态规划的结果，应用在长子串上，最终得出结果
 	std::string LongestPalindromeDp(const std::string& s)
 	{
@@ -118,8 +118,8 @@ public:
 		{
 			size_t temp_left_1 = 0;
 			size_t temp_left_2 = 0;
-			int length_1 = PalindromeLength(s, i, i, temp_left_1);
-			int length_2 = i < size - 1 ? PalindromeLength(s, i, i + 1, temp_left_2) : 0;
+			int length_1 = this->PalindromeLength(s, i, i, temp_left_1);
+			int length_2 = i < size - 1 ? this->PalindromeLength(s, i, i + 1, temp_left_2) : 0;
 
 			if (length_1 > length_2 && length_1 > max_length)
 			{
