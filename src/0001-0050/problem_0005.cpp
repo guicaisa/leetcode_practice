@@ -227,7 +227,8 @@ public:
 	// 归纳一下三种情况
 	// 1. i > right，以i为中心进行扩展，获得回文半径，更新center，right
 	// 2. i <= right，根据公式mirror = 2 * center - i，如果radius[mirror] < right - i，radius[i] = radius[mirror]
-	// 3. i <= right，根据公式mirror = 2 * center - i，如果radius[mirror] >= right - i, radius[i] = right - i，再此基础上进行中心扩展
+	// 3. i <= right，根据公式mirror = 2 * center - i，如果radius[mirror] = right - i, radius[i] = right - i，再此基础上进行中心扩展
+	// 4. i <= right，根据公式mirror = 2 * center - i，如果radius[mirror] > right - i, radius[i] = right - i
 	// 更新center，right
 	std::string LongestPalindromeBetter4(const std::string& s)
 	{
@@ -258,6 +259,10 @@ public:
 				if (radius[mirror] < right - i)
 				{
 					radius[i] = radius[mirror];
+				}
+				else if (radius[mirror] > right - i)
+				{
+					radius[i] = right - i;
 				}
 				else
 				{

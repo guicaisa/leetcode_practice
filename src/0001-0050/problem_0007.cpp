@@ -2,16 +2,12 @@
 #include <vector>
 #include <cmath>
 
-/**
- * https://leetcode.com/problems/reverse-integer/
- */
+// https://leetcode-cn.com/problems/reverse-integer/
 
 class Solution
 {
 public:
-	/**
-	 * 逆转数字位数
-	 */
+	// 逆转数字位数，用数组保存逆序数字，用int64变量处理越界
 	int Reverse(int x) 
 	{
 		int64_t result = 0;
@@ -36,16 +32,15 @@ public:
 		return result;
 	}
 
-	/**
-	 * 优化代码，去除依赖数组和int64类型的操作
-	 * 每遍历一次新的位数，就将原有结果乘10并加上新的余位
-	 * 判断越界的方法为在每次计算出新值的时候提前判断
-	 * 以正数举例，如果新result越界的话，那么旧result * 10 >= INT_MAX / 10，因为step永远只能是个位数
-	 * 那么就只有两种情况
-	 * 1. 旧result > INT_MAX / 10，那新result必然越界
-	 * 2. 旧result == INT_MAX / 10，step > 7 必然越界
-	 * 负数的情况同理
-	 */
+	// 优化代码，去除依赖数组和int64类型的操作
+	// 每遍历一次新的位数，就将原有结果乘10并加上新的余位
+	// 判断越界的方法为在每次计算出新值的时候提前判断
+	// 正数
+	// 1：result > INT_MAX / 10，那么result * 10 必然越界
+	// 2：result == INT_MAX / 10 && step > 7，INT_MAX = 2147483647，INT_MAX / 10 = 214748364，所以result == INT_MAX / 10 && step > 7 必然越界
+	// 负数
+	// 1：result < INT_MIN / 10，那么result * 10 必然越界
+	// 2：result == INT_MIN / 10 && step < -8，INT_MIN = -2147483647 - 1，INT_MIN / 10 = -214748364，所以result == INT_MIN && step < -8 必越界
 	int ReverseBetter(int x)
 	{
 		int result = 0;
