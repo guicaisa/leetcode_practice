@@ -1,65 +1,36 @@
 ﻿#include <stdio.h>
 #include <vector>
 
-/**
- * https://leetcode.com/problems/palindrome-number/
- */
+// https://leetcode-cn.com/problems/palindrome-number/
 
 class Solution
 {
 public:
-	/**
-	 * 使用数组把每个数字存储起来，再从头尾分别对比
-	 */
+	// 首先负数肯定不是回文数字，因为有一个负号
+	// 然后个位数为0的数字除了0本身肯定也不是回文，因为没有前导的0
+	// 剩下的情况我们使用反转的方式来处理
+	// 反转数字的一半，每次遍历对10取模获得当前数字的个位数
+	// 将其累加在反转的数字中，然后当前数字除以10，继续下次遍历
+	// 当反转的数字大于或者等于当前数字的时候，表示已经正好反转了一半或者超出一半，停止遍历
+	// 判断当前数字和反转是否相等(偶数对称情况)或者当前数字是否等于反转数字除以10(奇数对称情况)
+	// 只反转一半的数字，而不是反转全部数字的方法，可以天然的不用处理数值溢出的情况。
 	bool IsPalindrome(int x) 
 	{
-		if (x < 0)
+		if (x < 0 || (x % 10 == 0 && x != 0))
 		{
 			return false;
 		}
 
-		std::vector<int> digit_vec;
-
-		do
+		int half = 0;
+		while (x > half)
 		{
-			digit_vec.emplace_back(x % 10);
+			half = half * 10 + x % 10;
 			x /= 10;
-		} while (x);
-
-		size_t size = digit_vec.size();
-
-		for (size_t i = 0; i < size; ++i)
-		{
-			if (digit_vec[i] != digit_vec[size - i - 1])
-			{
-				return false;
-			}
 		}
 
-		return true;
+		return x == half || x == half / 10;
 	}
 
-	/**
-	 * 更简单明了的方法，直接翻转该数字，然后与原数字比较
-	 */
-	bool IsPalindromeBetter(int x)
-	{
-		if (x < 0)
-		{
-			return false;
-		}
-
-		int reverse_num = 0;
-		int temp = x;
-		
-		do
-		{
-			reverse_num = reverse_num * 10 + temp % 10;
-			temp /= 10;
-		} while (temp);
-
-		return reverse_num == x;
-	}
 };
 
 //int main(int argc, char** argv)
