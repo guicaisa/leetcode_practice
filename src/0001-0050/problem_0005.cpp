@@ -230,7 +230,7 @@ public:
 	// 3. i <= right，根据公式mirror = 2 * center - i，如果radius[mirror] = right - i, radius[i] = right - i，再此基础上进行中心扩展
 	// 4. i <= right，根据公式mirror = 2 * center - i，如果radius[mirror] > right - i, radius[i] = right - i
 	// 更新center，right
-	std::string LongestPalindromeBetter4(const std::string& s)
+	std::string LongestPalindromeManacher(const std::string& s)
 	{
 		if (s == "")
 		{
