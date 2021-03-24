@@ -2,18 +2,15 @@
 #include <vector>
 #include <algorithm>
 
-/**
- * https://leetcode.com/problems/container-with-most-water/
- */
+// https://leetcode-cn.com/problems/container-with-most-water/
 
 class Solution 
 {
 public:
-	/**
-	 * 从头尾分别向中心递进，假设一开始最大的面积是在头尾2个索引处
-	 * 由高度是由短板来定义的，所以之后为了寻找更大的面积
-	 * 由较低的那侧向高侧递进，来找到更高的高度，来弥补宽度减少的损失，从而获得更大的面积
-	 */
+	// 从头尾分别向中心递进，假设一开始最大的面积是在头尾2个索引处
+	// 由于高度是由短板来定义的，横向在一开始已经是最大了，所以之后为了寻找更大的面积
+	// 只能缩小横向的宽度，寄希望于在纵向上有更高的高度
+	// 由较低的那侧向高侧递进，来找到更高的高度，来弥补宽度减少的损失，从而获得更大的面积
 	int MaxArea(const std::vector<int>& height)
 	{
 		if (height.size() == 0)
