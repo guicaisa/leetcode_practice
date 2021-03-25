@@ -2,70 +2,17 @@
 #include <string>
 #include <unordered_map>
 
-/**
- * https://leetcode.com/problems/integer-to-roman/
- */
+// https://leetcode-cn.com/problems/integer-to-roman/
 
 class Solution
 {
 public:
-	/**
-	 * 单独处理4，5，9三个数字，少于5的数字和大于5的数字有统一的处理方式
-	 */
+	// 单独处理4，5，9三个数字
+	// 小于4和大于5的数字，有统一的处理方式
+	// 数字1-3根据个数使用对应的数字1累加
+	// 数字6-8根据个数在对应的数字5后面加上对应个数的1
+	// 额外的我们需要根据当前的个，十，百，千的位数来选择对应的罗马数字
 	std::string IntToRoman(int num)
-	{
-		std::unordered_map<int, std::unordered_map<std::string, char> > roman_map;
-		roman_map[1]["1"] = 'I';
-		roman_map[1]["5"] = 'V';
-		roman_map[2]["1"] = 'X';
-		roman_map[2]["5"] = 'L';
-		roman_map[3]["1"] = 'C';
-		roman_map[3]["5"] = 'D';
-		roman_map[4]["1"] = 'M';
-
-		int step = 1;
-		std::string result;
-
-		while (num)
-		{
-			int step_num = num % 10;
-			std::string temp_str;
-
-			switch (step_num)
-			{
-				case 4:
-					temp_str = std::string(1, roman_map[step]["1"]) + std::string(1, roman_map[step]["5"]);
-					break;
-				case 5:
-					temp_str = std::string(1, roman_map[step]["5"]);
-					break;
-				case 9:
-					temp_str = std::string(1, roman_map[step]["1"]) + std::string(1, roman_map[step + 1]["1"]);
-					break;
-				default:
-					if (step_num < 5)
-					{
-						temp_str = std::string(step_num, roman_map[step]["1"]);
-					}
-					else if (step_num > 5)
-					{
-						temp_str = std::string(1, roman_map[step]["5"]) + std::string(step_num - 5, roman_map[step]["1"]);
-					}
-					break;
-			}
-
-			result = temp_str + result;
-			num /= 10;
-			++step;
-		}
-
-		return result;
-	}
-
-	/**
-	 * 减少耗时
-	 */
-	std::string IntToRomanFaster(int num)
 	{
 		int step = 1;
 		std::string result;
@@ -163,6 +110,26 @@ public:
 		return result;
 	}
 
+	// 排列出数字和罗马字符对应的数组，特别列出4和9相关数字对应的字符
+	// 输入数字不断减去对应的数字，并将相应的罗马字符添加到结果中
+	// 已处理好4和9的情况，剩余的2，3，6，7，8只需要用相应的数字1来堆积就可以了
+	std::string IntToRoman2(int num)
+	{
+		std::string result;
+		std::vector<int> vi = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+		std::vector<std::string> vr = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+
+		for (size_t i = 0; i < vi.size(); ++i)
+		{
+			while (num >= vi[i])
+			{
+				num -= vi[i];
+				result += vr[i];
+			}
+		}
+
+		return result;
+	}
 };
 
 //int main(int argc, char** argv)
