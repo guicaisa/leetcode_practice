@@ -48,7 +48,7 @@ public:
 		return this->DivideConquer(strs, 0, strs.size() - 1);
 	}
 
-	// 使用二分查找的方法，首先找出字符串数组中最短的字符串，因为最大公共前缀的长度就是这个最短字符串的长度
+	// 使用二分查找的方法，首先找出字符串数组中最短的字符串，因为最大公共前缀的长度至多就是这个最短字符串的长度
 	// 对这个最短字符串的长度做二分查找，分为左半部分和右半部分，然后对左半部分做遍历，看左半部分是否为一个公共前缀
 	// 如果是公共前缀，保存部分结果，并将下次二分查找的区间定位到右半区，因为左半部分的公共前缀肯定是小于等于整个公共前缀的
 	// 即右半部分可能还有公共前缀的一部分
@@ -147,13 +147,13 @@ private:
 	}
 };
 
-int main(int argc, char** argv)
-{
-	Solution s;
-
-	std::vector<std::string> strs = { "flower","flow","flight" };
-
-	std::string result = s.LongestCommonPrefixBinarySearch(strs);
-
-	return 0;
-}
+//int main(int argc, char** argv)
+//{
+//	Solution s;
+//
+//	std::vector<std::string> strs = { "flower","flow","flight" };
+//
+//	std::string result = s.LongestCommonPrefixBinarySearch(strs);
+//
+//	return 0;
+//}
