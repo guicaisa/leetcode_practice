@@ -2,16 +2,12 @@
 #include <string>
 #include <vector>
 
-/**
- * https://leetcode.com/problems/letter-combinations-of-a-phone-number/
- */
+// https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/
 
 class Solution 
 {
 public:
-	/**
-	 * 求组合结果，使用递归处理
-	 */
+	// 求组合结果，很典型的使用递归回溯方法的问题
 	std::vector<std::string> LetterCombinations(const std::string& digits)
 	{
 		std::vector<std::string> results;
