@@ -2,16 +2,12 @@
 #include <vector>
 #include <algorithm>
 
-/**
- * https://leetcode.com/problems/4sum/
- */
+// https://leetcode-cn.com/problems/4sum/
 
 class Solution 
 {
 public:
-	/**
-	 * 切割问题，分离成为一个数字和一个三个数字，使用3Sum的方式求剩下的三个数字的结果
-	 */
+	// 切割问题，分离成为一个数字和一个三个数字，使用3Sum的方式求剩下的三个数字的结果
 	std::vector<std::vector<int> > FourSum(std::vector<int>& nums, const int target) 
 	{
 		std::vector<std::vector<int> > results;
@@ -34,7 +30,6 @@ public:
 	
 		return results;
 	}
-
 
 private:
 	void ThreeSum(const std::vector<int>& nums, const int start_index, const int target, std::vector<std::vector<int> >& results)
@@ -93,6 +88,7 @@ private:
 		}
 	}
 };
+
 //
 //int main(int argc, char** argv)
 //{
