@@ -1,8 +1,6 @@
 ﻿#include <stdio.h>
 
-/**
- * https://leetcode.com/problems/merge-two-sorted-lists/
- */
+// https://leetcode-cn.com/problems/merge-two-sorted-lists/
 
 struct ListNode 
 {
@@ -19,72 +17,77 @@ struct ListNode
 class Solution 
 {
 public:
-	/**
-	 * 遍历2个指针，根据值域的大小安排其节点在新链表中的位置
-	 * 如果一个链表遍历到底了，就直接将还没遍历完的链表直接接在新链表的后面
-	 */
+	// 使用一个头指针保存链表起始的指针，方便返回结果
+	// 遍历l1和l2，比较2个指针值域的大小，从而决定指针的连接顺序
+	// 如果一个链表遍历到底了，就直接将还没遍历完的链表接在新链表的后面
 	ListNode* MergeTwoLists(ListNode* l1, ListNode* l2)
 	{
-		ListNode* result = NULL;
-		ListNode* cur_node = NULL;
-
-		while (l1 || l2)
+		ListNode* head = new ListNode(-1);
+		ListNode* cur = head;
+		
+		while (l1 && l2)
 		{
-			ListNode* temp = NULL;
-
-			if (l1 && l2)
+			if (l1->val < l2->val)
 			{
-				if (l1->val < l2->val)
-				{
-					temp = l1;
-					l1 = l1->next;
-				}
-				else
-				{
-					temp = l2;
-					l2 = l2->next;
-				}
-			}
-			else if (l1)
-			{
-				if (result)
-				{
-					cur_node->next = l1;
-				}
-				else
-				{
-					result = l1;
-				}
-				break;
-
-			}
-			else if (l2)
-			{
-				if (result)
-				{
-					cur_node->next = l2;
-				}
-				else
-				{
-					result = l2;
-				}
-				break;
-			}
-
-			temp->next = NULL;
-
-			if (result == NULL)
-			{
-				result = temp;
+				cur->next = l1;
+				l1 = l1->next;
 			}
 			else
 			{
-				cur_node->next = temp;
+				cur->next = l2;
+				l2 = l2->next;
 			}
-			cur_node = temp;
+
+			cur = cur->next;
 		}
 
-		return result;
+		cur->next = l1 ? l1 : l2;
+
+		return head->next;
+	}
+
+	// 使用递归的方法
+	// 每层递归仍然使用一个头指针，方便返回结果
+	// 核心思想是如果l1和l2都不为空的情况下，比较l1和l2的值域大小
+	// 较小的那一个指针，向下递进一步，将l1->next和l2或者l1和l2->next作为下一级递归函数的变量
+	// 不断递归调用，求出最终结果，当然也要考虑l1和l2同时为空或者其中有一个为空的特殊情况
+	ListNode* MergeTwoListsRecursive(ListNode* l1, ListNode* l2)
+	{
+		return this->Recursive(l1, l2);
+	}
+
+private:
+	ListNode* Recursive(ListNode* l1, ListNode* l2)
+	{
+		ListNode* head = new ListNode(-1);
+
+		if (l1 == NULL && l2 == NULL)
+		{
+			head->next = NULL;
+		}
+		else if (l1 == NULL)
+		{
+			head->next = l2;
+		}
+		else if (l2 == NULL)
+		{
+			head->next = l1;
+		}
+		else
+		{
+			if (l1->val < l2->val)
+			{
+				head->next = l1;
+				head->next->next = this->Recursive(l1->next, l2);
+			}
+			else
+			{
+				head->next = l2;
+				head->next->next = this->Recursive(l1, l2->next);
+			}
+		}
+
+		return head->next;
 	}
 };
 

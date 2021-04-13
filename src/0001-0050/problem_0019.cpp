@@ -1,8 +1,6 @@
 ﻿#include <stdio.h>
 
-/**
- * https://leetcode.com/problems/remove-nth-node-from-end-of-list/
- */
+// https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
 
 struct ListNode 
 {
@@ -19,9 +17,7 @@ struct ListNode
 class Solution 
 {
 public:
-	/**
-	 * 先计算列表长度，然后顺序找到那个节点进行替换，如果是头节点的话，直接去除头节点即可
-	 */
+	// 先遍历一次计算链表长度，然后再遍历一次找到那个节点进行删除
 	ListNode* RemoveNthFromEnd(ListNode* head, int n) 
 	{
 		ListNode* temp = head;
@@ -59,10 +55,8 @@ public:
 		return head;
 	}
 
-	/**
-	 * 递归解法，先递归到尾节点，然后减少n的值，当n为0时
-	 * 将当前节点的下一节点作为当前节点返回给上层，从而达到删除该节点的目的
-	 */
+	// 递归解法，先递归到尾节点，然后减少n的值，当n为0时
+	// 将当前节点的下一节点作为当前节点返回给上层，从而达到删除该节点的目的
 	ListNode* RemoveNthFromEndRecursive(ListNode* head, int n)
 	{
 		num_ = n;
@@ -70,24 +64,26 @@ public:
 		return this->Recursive(head);
 	}
 
-	/**
-	 * 使用双指针，其中一个是二级指针，根据n的大小，先将一级指针递进n-1次
-	 * 之后双指针一起递进移动，在一级指针移动到尾端之后，二级指针此时指向的即为倒数第n个节点
-	 * 直接将其之后的节点赋值给二级指针的解引用，完成删除节点
-	 */
+	// 使用快慢双指针只进行一次遍历，其中一个是二级指针，根据n的大小，先将一级指针递进n-1次
+	// 之后双指针一起递进移动，在一级指针移动到尾端之后，二级指针此时指向的即为倒数第n个节点
+	// 直接将其之后的节点赋值给二级指针的解引用，完成删除节点
 	ListNode* RemoveNthFromEndBetter(ListNode* head, int n)
 	{
 		ListNode** p = &head;
 		ListNode* temp = head;
-
-		for (int i = 1; i < n; ++i)
-		{
-			temp = temp->next;
-		}
+		int count = n - 1;
 
 		while (temp->next)
 		{
-			p = &((*p)->next);
+			if (count <= 0)
+			{
+				p = &((*p)->next);
+			}
+			else
+			{
+				--count;
+			}
+			
 			temp = temp->next;
 		}
 

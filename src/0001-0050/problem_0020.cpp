@@ -2,17 +2,16 @@
 #include <string>
 #include <stack>
 
-/**
- * https://leetcode.com/problems/valid-parentheses/
- */
+// https://leetcode-cn.com/problems/valid-parentheses/
 
 class Solution 
 {
 public:
-	/**
-	 * 考虑括号的对称性结果，使用栈的方式，遇到左括号入栈
-	 * 遇到右括号时查看栈顶元素，如果无元素或者不是对应的左括号则不是有效的括号结构
-	 */
+	// 由于这个题目中的括号不只包含小括号，还包括中括号和大括号
+	// 所以如果单单使用几个变量来记录左括号的值，碰到右括号再使对应的变量-1
+	// 这种方法是不适用的，因为没有考虑到三种括号位置的先后关系
+	// 所以使用栈的方式来处理这种问题是最合适的，遍历字符串，遇到左括号入栈
+	// 遇到右括号时查看栈顶元素，如果无元素或者不是对应的左括号则不是有效的括号结构
 	bool IsValid(const std::string& s)
 	{
 		std::stack<char> char_st;
