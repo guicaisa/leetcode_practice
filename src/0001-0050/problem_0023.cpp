@@ -2,9 +2,7 @@
 #include <vector>
 #include <map>
 
-/**
- * https://leetcode.com/problems/merge-k-sorted-lists/
- */
+// https://leetcode-cn.com/problems/merge-k-sorted-lists/
 
 struct ListNode 
 {
@@ -21,9 +19,7 @@ struct ListNode
 class Solution 
 {
 public:
-	/**
-	 * 使用multimap自动排序，然后重新链成新的链表
-	 */
+	// 将值域作为键，节点作为值，使用multimap自动排序，然后按照顺序重新连成新的链表，
 	ListNode* MergeKLists(const std::vector<ListNode*>& lists) 
 	{
 		std::multimap<int, ListNode*> node_map;
@@ -64,9 +60,40 @@ public:
 		return head;
 	}
 
-	/**
-	 * 使用分治策略，使用MergeTwoLists的算法分开计算每两个指针，得到最终结果
-	 */
+	// 使用优先队列的方式，假设链表数组中有n个链表，我们将这n个链表的头节点以值域为键，节点为值的方式放入优先队列或者map中
+	// 自动进行排序，然后取出头部的一个节点，即值域最小的节点，放入新链表中，然后将该节点的next节点再次放入优先队列或者map中
+	// 不断从队列中取出头部的节点，直到所有链表遍历结束
+	ListNode* MergeKListsPriorityQueue(const std::vector<ListNode*>& lists)
+	{
+		std::multimap<int, ListNode*> node_map;
+
+		for (size_t i = 0; i < lists.size(); ++i)
+		{
+			if (lists[i])
+			{
+				node_map.insert(std::make_pair(lists[i]->val, lists[i]));
+			}
+		}
+
+		ListNode* head = new ListNode(-1);
+		ListNode* cur = head;
+
+		while (node_map.size() > 0)
+		{
+			cur->next = node_map.begin()->second;
+			node_map.erase(node_map.begin());
+			cur = cur->next;
+			if (cur->next)
+			{
+				node_map.insert(std::make_pair(cur->next->val, cur->next));
+			}
+		}
+
+		return head->next;
+	}
+
+	// 使用分治策略，将数组不断二分进行递归，分别求解左右两部分的结果
+	// 递归调用返回之后，使用MergeTwoLists的算法合并2个链表
 	ListNode* MergeKListsDivideConquer(const std::vector<ListNode*>& lists)
 	{
 		if (lists.size() == 0)
@@ -99,66 +126,28 @@ private:
 
 	ListNode* MergeTwoLists(ListNode* l1, ListNode* l2)
 	{
-		ListNode* result = NULL;
-		ListNode* cur_node = NULL;
+		ListNode* head = new ListNode(-1);
+		ListNode* cur = head;
 
-		while (l1 || l2)
+		while (l1 && l2)
 		{
-			ListNode* temp = NULL;
-
-			if (l1 && l2)
+			if (l1->val < l2->val)
 			{
-				if (l1->val < l2->val)
-				{
-					temp = l1;
-					l1 = l1->next;
-				}
-				else
-				{
-					temp = l2;
-					l2 = l2->next;
-				}
-			}
-			else if (l1)
-			{
-				if (result)
-				{
-					cur_node->next = l1;
-				}
-				else
-				{
-					result = l1;
-				}
-				break;
-
-			}
-			else if (l2)
-			{
-				if (result)
-				{
-					cur_node->next = l2;
-				}
-				else
-				{
-					result = l2;
-				}
-				break;
-			}
-
-			temp->next = NULL;
-
-			if (result == NULL)
-			{
-				result = temp;
+				cur->next = l1;
+				l1 = l1->next;
 			}
 			else
 			{
-				cur_node->next = temp;
+				cur->next = l2;
+				l2 = l2->next;
 			}
-			cur_node = temp;
+
+			cur = cur->next;
 		}
 
-		return result;
+		cur->next = l1 ? l1 : l2;
+
+		return head->next;
 	}
 };
 
@@ -184,7 +173,7 @@ private:
 //
 //	std::vector<ListNode*> vl = { node_1_1, node_2_1, node_3_1 };
 //
-//	ListNode* ret = s.MergeKListsBetter(vl);
+//	ListNode* ret = s.MergeKListsPriorityQueue(vl);
 //
 //	return 0;
 //}
