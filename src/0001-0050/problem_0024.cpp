@@ -1,8 +1,6 @@
 ﻿#include <stdio.h>
 
-/**
- * https://leetcode.com/problems/swap-nodes-in-pairs/
- */
+// https://leetcode-cn.com/problems/swap-nodes-in-pairs/
 
 struct ListNode 
 {
@@ -19,10 +17,9 @@ struct ListNode
 class Solution 
 {
 public:
-	/**
-	 * 使用3个节点变量，分别保存2个连续的指针，以及之后的第三个指针
-	 * 交换2个连续指针的顺序，然后从第三个指针开始继续遍历
-	 */
+	// 使用3个节点变量，分别保存2个连续的指针，以及之后的第三个指针
+	// 交换2个连续指针的顺序，将交换顺序之后的结果连接在结果链表之后，
+	// 然后从第三个指针开始继续遍历，遍历的结束条件为剩余的节点个数小于2
 	ListNode* SwapPairs(ListNode* head) 
 	{
 		if (head == NULL || head->next == NULL)
@@ -64,27 +61,23 @@ public:
 		return ret_head;
 	}
 
-	/**
-	 * 使用二级指针保存第一个指针的地址，循环内交换2个指针的位置之后
-	 * 将第二个指针替换为头指针，将头指针的地址更新为第一个指针的next指针的地址
-	 * 作为下一次循环的第一个指针
-	 */
-	ListNode* SwapPairsBetter(ListNode* head)
+	// 使用递归的方式，以2个节点为一组进行递归调用
+	// 将第二个节点的next节点作为头节点进行一次递归操作
+	// 交换2个节点的顺序，将返回的结果连接在交换顺序后的节点后面
+	ListNode* SwapPairsRecursive(ListNode* head)
 	{
-		ListNode** p = &head;
-		ListNode* first = NULL;
-		ListNode* second = NULL;
-
-		while ((first = *p) && (second = first->next))
+		if (head == NULL || head->next == NULL)
 		{
-			first->next = second->next;
-			second->next = first;
-
-			*p = second;
-			p = &first->next;
+			return head;
 		}
 
-		return head;
+		ListNode* next = head->next;
+		ListNode* next_two = head->next->next;
+		ListNode* ret = this->SwapPairsRecursive(next_two);
+		head->next = ret;
+		next->next = head;
+
+		return next;
 	}
 };
 
@@ -103,7 +96,7 @@ public:
 //	node_3->next = node_4;
 //	node_4->next = node_5;
 //
-//	ListNode* ret = s.SwapPairsBetter(node_1);
+//	ListNode* ret = s.SwapPairsRecursive(node_1);
 //
 //	return 0;
 //}
