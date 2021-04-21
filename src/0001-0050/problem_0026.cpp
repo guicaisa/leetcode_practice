@@ -2,27 +2,16 @@
 #include <vector>
 #include <algorithm>
 
-/**
- * https://leetcode.com/problems/remove-duplicates-from-sorted-array/
- */
+// https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
 
 class Solution 
 {
 public:
-	/**
-	 * 使用标准库的函数将重复部分放到数组尾部，再删除
-	 */
+	// 使用双指针，将一个指针固定在不重复的数字索引处
+	// 另一个指针遍历数组，如果遇到不重复的数字，就递进第一个索引
+	// 如果遇到重复的数字，第一个指针停止不动，移动第二个指针直到遇到不重复的数字
+	// 放到第一个指针之后，遍历结束，返回第一个指针索引的值+1就是所有不重复数字的个数
 	int RemoveDuplicates(std::vector<int>& nums) 
-	{
-		nums.erase(std::unique(nums.begin(), nums.end()), nums.end());
-
-		return nums.size();
-	}
-
-	/**
-	 * 使用双索引，效果类似于标准库的unique函数，将重复的数字往后面排，效率更高点
-	 */
-	int RemoveDuplicatesBetter(std::vector<int>& nums)
 	{
 		if (nums.size() == 0)
 		{
@@ -30,10 +19,9 @@ public:
 		}
 
 		size_t i = 0;
-
 		for (size_t j = 1; j < nums.size(); ++j)
 		{
-			if (nums[j] != nums[i])
+			if (nums[i] != nums[j])
 			{
 				++i;
 				nums[i] = nums[j];
@@ -42,7 +30,6 @@ public:
 
 		return i + 1;
 	}
-
 };
 
 //int main(int argc, char** argv)
