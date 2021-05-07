@@ -1,18 +1,14 @@
 ﻿#include <stdio.h>
 #include <cmath>
 
-/**
- * https://leetcode.com/problems/divide-two-integers/
- */
+// https://leetcode-cn.com/problems/divide-two-integers/
 
 class Solution 
 {
 public:
-	/**
-	 * 一直用被除数减去除数，直到小于除数为止，统计其次数，就是最后的商
-	 * 一直循环减的话，效率太低，循环中套个循环，除数不断翻倍
-	 * 扩大每步的计算范围，减少循环次数，提升效率
-	 */
+	// 一直用被除数减去除数，直到小于除数为止，统计其次数，就是最后的商
+	// 一直循环减的话，效率太低，循环中套个循环，除数不断翻倍
+	// 扩大每步的计算范围，减少循环次数，提升效率
 	int Divide(int dividend, int divisor)
 	{
 		if (dividend == INT_MIN && divisor == -1)
