@@ -2,36 +2,23 @@
 #include <stdlib.h> 
 #include <vector>
 
-/**
- * https://leetcode.com/problems/search-in-rotated-sorted-array/
- */
+// https://leetcode-cn.com/problems/search-in-rotated-sorted-array/
 
 class Solution 
 {
 public:
 	// 由于数组旋转了，不是完全排序的数组，不能直接使用常规二分法
-	// 以数组旋转的索引为中间点，判断目标值存在于数组左边还是右边
-	// 二分查找的时候，根据中间值与目标值是否处于一边，判断下次下分的边界(往左还是往右)
-	// 当中间值与目标值处于同一边时，使用正常二分查找判断大小即可
-	int Search(const std::vector<int>& nums, const int target) 
+	// 每次二分的时候，需要判断左右两段哪一段是完全在一边的(就是没有跨越中间的旋转点)
+	// 优先判断没有跨界的一段，判断target是否在其区间内，如果在，下一次就以这一段作为二分查找的区间，就是常规的二分查找了 
+	// 如果targe不在没有跨界的那一段中，就选剩下一段，继续做二分查找，直到找出结果
+	int Search(const std::vector<int>& nums, const int target)
 	{
 		if (nums.size() == 0)
 		{
 			return -1;
 		}
 
-		int left_flag = 0;
-		int right_flag = 0;
-
-		if (target >= nums[0])
-		{
-			left_flag = 1;
-		}
-		else if (target <= nums[nums.size() - 1])
-		{
-			right_flag = 1;
-		}
-		else
+		if (target < nums[0] && target > nums[nums.size() - 1])
 		{
 			return -1;
 		}
@@ -43,25 +30,32 @@ public:
 		while (left <= right)
 		{
 			mid = (left + right) / 2;
-			if (left_flag == 1 && nums[mid] < nums[0] && nums[mid] <= nums[nums.size() - 1])
+			if (nums[mid] == target)
 			{
-				right = mid - 1;
+				return mid;
 			}
-			else if (right_flag == 1 && nums[mid] >= nums[0] && nums[mid] > nums[nums.size() - 1])
+
+			if (nums[left] <= nums[mid])
 			{
-				left = mid + 1;
-			}
-			else if (nums[mid] > target)
-			{
-				right = mid - 1;
-			}
-			else if (nums[mid] < target)
-			{
-				left = mid + 1;
+				if (nums[left] <= target && target <= nums[mid])
+				{
+					right = mid - 1;
+				}
+				else
+				{
+					left = mid + 1;
+				}
 			}
 			else
 			{
-				return mid;
+				if (nums[mid] <= target && target <= nums[right])
+				{
+					left = mid + 1;
+				}
+				else
+				{
+					right = mid - 1;
+				}
 			}
 		}
 
