@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <vector>
 
-/**
- * https://leetcode.com/problems/search-insert-position/
- */
+// https://leetcode.com/problems/search-insert-position/
 
 class Solution 
 {
 public:
+	// 解法就是简单的二分查找，当二分查找的循环退出的时候
+	// 如果找不到目标值，那左边界就是目标值的插入点
 	int SearchInsert(const std::vector<int>& nums, const int target) 
 	{
 		int left = 0;
