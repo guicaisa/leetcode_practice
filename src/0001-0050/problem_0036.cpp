@@ -3,13 +3,13 @@
 #include <vector>
 #include <string>
 
-/**
- * https://leetcode.com/problems/valid-sudoku/
- */
+// https://leetcode-cn.com/problems/valid-sudoku/
 
 class Solution 
 {
 public:
+	// 保持一个行，列，九宫格的二维数组，用来表示在某行，某列，某九宫格中
+	// 1-9的数字是否已经存在，九宫格的序号n = i / 3 * 3 + j / 3
 	bool IsValidSudoku(const std::vector<std::vector<char> >& board)
 	{
 		int vr[9][9] = { 0 };
