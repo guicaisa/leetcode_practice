@@ -3,14 +3,12 @@
 #include <vector>
 #include <algorithm>
 
-/**
- * https://leetcode.com/problems/combination-sum/
- */
+// https://leetcode-cn.com/problems/combination-sum/
 
 class Solution 
 {
 public:
-	// 递归处理所有的情况
+	// 递归回溯，遍历所有情况
 	std::vector<std::vector<int> > CombinationSum(std::vector<int>& candidates, const int target) 
 	{
 		sort(candidates.begin(), candidates.end());
