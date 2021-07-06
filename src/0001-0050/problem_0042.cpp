@@ -77,6 +77,96 @@ public:
 
 		return sum;
 	}
+
+	// 使用栈的方式，遍历的过程中将数组的索引入栈
+	// 栈中的索引对应的值是递减的，所以当遍历到一个数大于栈顶索引对应的数时
+	// 这表明出现了一个低洼处，此时弹出栈顶元素，作为当前需要计算的值
+	// 此时如果栈中没有元素了，抛弃这个低洼，因为没有左边界无法积水
+	// 如果栈中还有元素，可以称之为left，判断该索引对应的值和当前遍历到的值的大小
+	// 较小的值减去当前计算的索引对应的值即为高度，left索引和当前遍历的索引之间的差即为宽
+	// 宽乘高得到可以积水的数值累加到结果中
+	int TrapStack(const std::vector<int>& height)
+	{
+		if (height.size() == 0)
+		{
+			return 0;
+		}
+
+		int sum = 0;
+		std::stack<int> si;
+		for (size_t i = 0; i < height.size(); ++i)
+		{
+			while (!si.empty() && height[i] > height[si.top()])
+			{
+				int top = si.top();
+				si.pop();
+				if (si.empty())
+				{
+					break;
+				}
+				int pre = si.top();
+				int w = i - pre - 1;
+				int h = std::min(height[i], height[pre]) - height[top];
+				sum += w * h;
+			}
+
+			si.push(i);
+		}
+
+		return sum;
+	}
+	
+	//使用双指针的方法，确定左右2个索引指针
+	//遍历过程中，判断当前左右2个指针对应的值小，就从哪一侧计算
+	//其实就是假设了一个边界，计算低的那一边(短板)
+	//2个max变量用来记录遍历过程中，左右出现过的最大值
+	//如果当前值比最大值大，肯定还没出现低洼，无法积水
+	//如果当前值比最大值小，此刻低洼出现，同侧的一边有最大值
+	//另一侧有比自己高的值，自己这个位置就形成了低洼
+	//此时当前侧的最大值肯定比另一侧的边界值小，即短板
+	//最大值减去当前所在位置值，即该位置的积水量，累计结果
+	int TrapTwoPointers(const std::vector<int>& height)
+	{
+		if (height.size() == 0)
+		{
+			return 0;
+		}
+
+		int max_left = 0;
+		int max_right = 0;
+		int left = 0;
+		int right = height.size() - 1;
+		int sum = 0;
+		while (left < right)
+		{
+			if (height[left] < height[right])
+			{
+				if (height[left] > max_left)
+				{
+					max_left = height[left];
+				}
+				else
+				{
+					sum += max_left - height[left];
+				}
+				++left;
+			}
+			else
+			{
+				if (height[right] > max_right)
+				{
+					max_right = height[right];
+				}
+				else
+				{
+					sum += max_right - height[right];
+				}
+				++right;
+			}
+		}
+
+		return sum;
+	}
 };
 
 //int main(int argc, char** argv)
