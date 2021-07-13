@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <string>
 
-/**
- * https://leetcode.com/problems/multiply-strings/
- */
+// https://leetcode-cn.com/problems/multiply-strings/
 
 class Solution {
 public:
