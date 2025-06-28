@@ -2,7 +2,7 @@
 
 using namespace std;
 
-//https://leetcode.cn/problems/remove-element/
+// https://leetcode.cn/problems/remove-element/
 
 class Solution {
 public:
