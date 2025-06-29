@@ -4,7 +4,8 @@ using namespace std;
 
 // https://leetcode.cn/problems/remove-element/
 
-class Solution {
+class Solution 
+{
 public:
     //1. 双指针
     //使用一个单独的指针指向数组头部，然后用另外一个指针遍历数组，遇到与val不同的值则根据第一个指针赋值到数组中

@@ -4,7 +4,8 @@ using namespace std;
 
 // https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
 
-class Solution {
+class Solution 
+{
 public:
     //1. 双指针
     //使用一个指针指index向数组的头部，然后使用另外一个指针遍历数组，由于数组是排序好的
