@@ -2,9 +2,15 @@
 
 using namespace std;
 
-class Solution {
+// https://leetcode.cn/problems/rotate-array/
+
+class Solution
+{
 public:
-    void rotate(vector<int>& nums, int k) {
+    //1. 数组
+    //使用临时数组变量作为nums的副本，计算每个值的新位置，然后设置到结果数组中
+    void rotate(vector<int>& nums, int k)
+    {
         if (nums.size() == 0)
         {
             return;
@@ -14,35 +20,44 @@ public:
         {
             return;
         }
-        int offset = nums.size() % shift;
-        int n = nums.size() / shift * shift;
-        int round = nums.size() / shift + 1;
-        int temp = nums[0];
-        int pos = shift % nums.size();
-        for (; pos != 0;)
+        vector<int> temp = nums;
+        for (int i = 0; i < temp.size(); ++i)
         {
-            swap(nums[pos], temp);
-            pos = (shift + pos) % nums.size();
+            int index = (i + k) % nums.size();
+            nums[index] = temp[i];
         }
+    }
+
+    //2. 翻转
+    //根据题目中提示"部分翻转"而得到的启发，通过3次翻转即可得到轮转的结果
+    void rotateReverse(vector<int>& nums, int k)
+    {
+        if (nums.size() == 0)
+        {
+            return;
+        }
+        int shift = k % nums.size();
+        if (shift == 0)
+        {
+            return;
+        }
+        reverse(nums.begin(), nums.end()); //第一次，翻转整个数组
+        reverse(nums.begin(), nums.begin() + shift); //第二次，翻转前shift个元素
+        reverse(nums.begin() + shift, nums.end()); //第三次，翻转后剩下后半段的所有元素
     }
 };
 
 // int main(int argc, char** argv)
 // {
 //     Solution s;
-//     vector<int> nums = {1,2,3,4,5,6};
-//     int k = 4;
-//     s.rotate(nums, k);
 
-//     // {1,2,3,4,5,6}
-//     // {5,2,3,4,1,6}
-//     // {5,6,3,4,1,2}
-//     // {3,6,5,4,1,2}
-//     // {3,4,5,6,1,2}
+//     vector<int> nums = {1,2,3,4,5,6,7};
+//     int k = 3;
+//     s.rotateReverse(nums, k);
 
-//     // 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
-//     // 12,13,14,15,16,17,18,19,20,21,22,|1,2,3,4,5,6,7,8,9,10,11,|23,24,25,26,27
-//     // 23,24,25,26,27,17,18,19,20,21,22,|1,2,3,4,5,6,7,8,9,10,11,|12,13,14,15,16
-//     // 17,18,19,20,21,23,24,25,26,27,22
+//     nums = {-1,-100,3,99};
+//     k = 2;
+//     s.rotateReverse(nums, k);
+
 //     return 0;
 // }
