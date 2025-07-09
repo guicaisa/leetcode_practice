@@ -15,6 +15,7 @@ public:
         int max_pos = 0;
         for (int i = 0; i < nums.size(); ++i)
         {
+            //当前能达到的最远位置max_pos，不能覆盖到i
             if (i > max_pos)
             {
                 return false;

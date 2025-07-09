@@ -18,6 +18,7 @@ public:
         for (; right < nums.size() - 1; )
         {
             int max_pos = 0;
+            //left和right为当前可到达的区间，在可到达区间内计算下次跳跃能到达的最远位置
             for (int i = left; i <= right; ++i)
             {
                 max_pos = max(max_pos, i + nums[i]);
