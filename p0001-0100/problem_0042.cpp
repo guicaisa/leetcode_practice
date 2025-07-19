@@ -119,28 +119,68 @@ public:
         return sum;
     }
 
-    // int trapTowPointers(vector<int>& height)
-    // {
-    //     int left = 0;
-    //     int right = height.size() - 1;
-    //     while (left <= right)
-    //     {
+    //4. 双指针
+    //使用左右指针，向中间位置遍历，计算低洼处垂直方向的积水量，这种解法只需要一次遍历，并且无需额外的内存空间
+    //初始设定左右指针为头尾部分，从较低的一边开始进行遍历，在较低一侧遍历的过程中不断更新那一侧的max高度
+    //由于当前遍历那侧的max值肯定是小于另一边某个高度，根据短板原理，使用该侧的max高度来与当前位置的高度计算积水
+    //遍历过程中，当遇到当前高度小于max值，则表示出现了低洼，计算积水量
+    //有个疑问，比如在左侧遍历的时候，为什么可以笃定left_max一定是当前位置的短板，就不会出现其实短板在右侧的情况吗
+    //首先，假设在刚开始的时候，只有在height[left] < height[right]的情况下，才会在左边进行遍历，所以此时计算的出来的left_max一定是比height[right]小的，短板一定是left_max
+    //其次，如果是从左边遍历转到了一次右边遍历，再转回左边的话，计算有新的height会大于left_max，但是考虑在height[left] < height[right]限制下，短板肯定还是left_max
+    //那么如果新一轮左侧遍历中，没有更新过left_max，但是记住，第一轮左侧遍历时，left_max就是在height[left] < height[right]条件下产生的，所以短板还是left_max
+    //所以理解这个问题的关键点在于，left_max始终是height[left] < height[right]条件下的产物，所以left_max一定会是短板，right_max也是一样的道理
+    int trapTowPointers(vector<int>& height)
+    {
+        int left = 0;
+        int right = height.size() - 1;
+        int left_max = 0;
+        int right_max = 0;
+        int sum = 0;
+        while (left < right)
+        {
+            //右侧的高
+            if (height[left] < height[right])
+            {
+                //height[left] > left_max表示左侧高度在递增
+                if (height[left] > left_max)
+                {
+                    left_max = height[left];
+                }
+                //height[left] <= left_max表示遇到了低洼，计算积水
+                else
+                {
+                    sum += left_max - height[left];
+                }
+                ++left;
+            }
+            else
+            {
+                //右侧原理与左侧一致
+                if (height[right] > right_max)
+                {
+                    right_max = height[right];
+                }
+                else
+                {
+                    sum += right_max - height[right];
+                }
+                --right;
+            }
+        }
 
-    //     }
-
-    //     return 0;
-    // }
+        return sum;
+    }
 };
 
-int main(int argc, char** argv)
-{
-    Solution s;
+// int main(int argc, char** argv)
+// {
+//     Solution s;
 
-    vector<int> height = {0,1,0,2,1,0,1,3,2,1,2,1};
-    int result = s.trapStack(height);
+//     vector<int> height = {0,1,0,2,1,0,1,3,2,1,2,1};
+//     int result = s.trapTowPointers(height);
 
-    height = {4,2,0,3,2,5};
-    result = s.trapStack(height);
+//     height = {4,2,0,3,2,5};
+//     result = s.trapTowPointers(height);
 
-    return 0;
-}
+//     return 0;
+// }
