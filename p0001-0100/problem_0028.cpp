@@ -7,6 +7,8 @@ using namespace std;
 class Solution 
 {
 public:
+    //1. 双指针
+    //使用两个指针分别指向haystack和needle同时进行遍历即可，不匹配时就重新定位
     int strStr(string haystack, string needle) 
     {
         int index = 0; //标识haystack中的起始位置
