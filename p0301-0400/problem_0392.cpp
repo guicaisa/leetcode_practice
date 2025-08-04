@@ -2,6 +2,8 @@
 
 using namespace std;
 
+// https://leetcode.cn/problems/is-subsequence/
+
 class Solution 
 {
 public:
