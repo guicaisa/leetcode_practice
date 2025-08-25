@@ -8,6 +8,9 @@ using namespace std;
 class Solution 
 {
 public:
+    //1. 排序+双指针
+    //首先对数组进行排序，在遍历的过程中可以去除掉重复元素，不进行处理
+    //确定单个元素之后，在剩下的数组中使用双指针来当作双数之和问题处理
     vector<vector<int>> threeSum(vector<int>& nums) 
     {
         sort(nums.begin(), nums.end());

@@ -5,6 +5,8 @@
 
 using namespace std;
 
+// https://leetcode.cn/problems/substring-with-concatenation-of-all-words/
+
 class Solution 
 {
 public:
