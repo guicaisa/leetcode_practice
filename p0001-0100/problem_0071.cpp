@@ -8,6 +8,11 @@ using namespace std;
 class Solution 
 {
 public:
+    //1. 栈
+    //遍历字符串，将被斜杠划分出的字符串添加到栈中
+    //遍历完成之后，开始不断从栈中弹出元素，如果是"."或者空字符串就略过
+    //如果是".."就记录次数，遇到其他正常的元素就拼接到结果字符串中
+    //如果之前只记录".."次数的话，在遇到正常字符串的时候，就不进行拼接，用掉次数并略过
     string simplifyPath(string path) 
     {
         stack<string> ss;
