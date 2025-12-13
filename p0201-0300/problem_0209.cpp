@@ -47,12 +47,12 @@ public:
     }
 
     //2. 前缀和+二分查找
-    //暴力破解法时间复杂度的原因主要在于双层循环，由于nums所有元素都是正数，所以可以考虑构建生序的前缀和数组然后通过二分查找的方式降低时间复杂度
-    //首先构建前缀和数组prefix_sum，prefix_sum[i]表示从nums[0]到nums[i]之间所有元素的和(包含nums[i])，这个数组是天然生序的
+    //暴力破解法时间复杂度的原因主要在于双层循环，由于nums所有元素都是正数，所以可以考虑构建前缀和数组然后通过二分查找的方式降低时间复杂度
+    //首先构建前缀和数组prefix_sum，prefix_sum[i]表示从nums[0]到nums[i]之间所有元素的和(包含nums[i])，这个数组是天然升序的
     //循环以每个nums[i]作为起点，在范围[1, nums.size()-1]中查找结果，假设某个索引x，满足nums[i]...nums[x]间所有元素的和大于等于target
     //这个和可以用前缀和来表示，即prefix_sum[x] - prefix_sum[i-1]，所以prefix_sum[x] - prefix_sum[i-1] >= target，可得prefix_sum[x] >= prefix_sum[i-1] + target
     //所以现在问题变成了在范围[1, nums.size()-1]中，查找第一个前缀和大于等于prefix_sum[i-1] + target的值索引，即可获以nums[i]为起点的最小数组长度
-    //由于前缀和数组是生序的，这一步查找可以使用二分查找来处理，降低时间复杂度，c++中可以使用现成的函数lower_bound查找范围内大于等于某个值的迭代器
+    //由于前缀和数组是升序的，这一步查找可以使用二分查找来处理，降低时间复杂度，c++中可以使用现成的函数lower_bound查找范围内大于等于某个值的迭代器
     //如果能找到对应的迭代器，就可以计算该位置和i的距离，将长度较小值保存在结果min_len中
     int minSubArrayLenPrefixSumBinary(int target, vector<int>& nums)
     {
