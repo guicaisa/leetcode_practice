@@ -19,7 +19,8 @@ class Solution
 {
 public:
     //1. 哈希表+递归
-    //
+    //由于所有节点的val值都是不重复的，所以先用哈希表为每个值与其在先序遍历数组和中序遍历数组中的位置建立映射关系
+    //将问题分解为构造每个节点，构造每个节点的过程中，又分为构造该节点的左子树和右子树，从而形成递归调用
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) 
     {
 
