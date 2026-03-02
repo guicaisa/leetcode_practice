@@ -7,6 +7,14 @@ using namespace std;
 class Solution 
 {
 public:
+    //1. 遍历
+    //设定四个边界变量top,bottom,left,right，分别代表当前尚未遍历区域的上,下,左,右边界
+    //按照"左->右","上->下","右->左","下->上"的固定顺序循环遍历当前层
+    //完成当前层的遍历之后，将边界向中心移动一位，++top,--bottom,++left,--right
+    //在遍历每一层的后两个方向"右->左"和"下->上"之前，必须进行二次检查
+    //如果top==bottom-1或者left==right-1，则表示最后一层已退化成了一维数组(单行或者单列)
+    //此时应停止后续方向的遍历，否则会导致已访问过的元素被重复计入结果
+    //当左边界超过右边界或者上边界超过下边界时，表示所有层级已处理完，结束遍历，返回结果
     vector<int> spiralOrder(vector<vector<int>>& matrix) 
     {
         vector<int> results;
