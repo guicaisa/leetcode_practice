@@ -33,6 +33,7 @@ public:
             {
                 results.push_back(matrix[i][right-1]);
             }
+            //如果当前层退化为了一维数组，则不需要遍历"右->左"和"下->上"两个方向，不然会出现重复的元素
             if (left < right-1 && top < bottom-1) 
             {
                 for (int i = right - 2; i >= left+1; --i)
