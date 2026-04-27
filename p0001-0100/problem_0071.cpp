@@ -9,10 +9,9 @@ class Solution
 {
 public:
     //1. 栈
-    //遍历字符串，将被斜杠划分出的字符串添加到栈中
-    //遍历完成之后，开始不断从栈中弹出元素，如果是"."或者空字符串就略过
-    //如果是".."就记录次数，遇到其他正常的元素就拼接到结果字符串中
-    //如果之前只记录".."次数的话，在遇到正常字符串的时候，就不进行拼接，用掉次数并略过
+    //遍历字符串，通过索引记录的方式，将path按照斜杠/分割成一个个独立的子字符串
+    //若子串为"."则直接跳过不入栈，若字串为".."并且栈不为空，则弹出栈顶元素，若为正常目录名则压入栈中
+    //遍历完成之后，依次从栈中去元素，并且在每个目录名前补充/，若最终结果为空，则返回根目录/，否则返回拼接好的字符串
     string simplifyPath(string path) 
     {
         stack<string> ss;
@@ -26,7 +25,10 @@ public:
                     index = i;
                     if (i == path.size() - 1)
                     {
-                        ss.push(path.substr(i, 1));
+                        if (string str = path.substr(i, 1); str != ".")
+                        {
+                            ss.push(path.substr(i, 1));
+                        }
                     }   
                 }
             }
@@ -39,7 +41,18 @@ public:
                     {
                         ++length;
                     }
-                    ss.push(path.substr(index, length));
+                    string str = path.substr(index, length);
+                    if (str == "..")
+                    {
+                        if (!ss.empty())
+                        {
+                            ss.pop();
+                        }
+                    }
+                    else if (str != ".")
+                    {
+                        ss.push(path.substr(index, length));
+                    }
                     index = -1;
                 }
             }
@@ -51,18 +64,8 @@ public:
         {
             string str = ss.top();
             ss.pop();
-            if (str == "" || str == ".")
+            if (str == "")
             {
-                continue;
-            }
-            if (str == "..")
-            {
-                ++pre_cnt;
-                continue;
-            }
-            if (pre_cnt)
-            {
-                --pre_cnt;
                 continue;
             }
             result = "/" + str + result;
